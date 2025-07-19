@@ -129,6 +129,9 @@ function displayMessages(messages) {
             <span class="message-date">${formatDate(message.Date_posted)}</span>
           </div>
           <div class="message-actions">
+            <button class="edit-btn" onclick="openEditModal(${message.Message_ID})" title="Edit message">
+              <i class='bx bx-edit'></i>
+            </button>
             <button class="delete-btn" onclick="deleteMessage(${message.Message_ID})" title="Delete message">
               <i class='bx bx-trash'></i>
             </button>
@@ -144,6 +147,37 @@ function displayMessages(messages) {
     document.querySelectorAll('.message-item.animate-in').forEach(el => el.classList.remove('animate-in'));
   }, 400);
 }
+
+// Modal logic for editing messages
+let editingMessageId = null;
+function openEditModal(messageId) {
+  const msg = staticMessages.find(msg => msg.Message_ID === messageId);
+  if (!msg) return;
+  editingMessageId = messageId;
+  document.getElementById('editMessageTextarea').value = msg.Message_Content;
+  document.getElementById('editModal').style.display = 'flex';
+}
+function closeEditModal() {
+  document.getElementById('editModal').style.display = 'none';
+  editingMessageId = null;
+}
+document.getElementById('saveEditBtn').onclick = function() {
+  const newContent = document.getElementById('editMessageTextarea').value.trim();
+  if (editingMessageId !== null && newContent) {
+    const msg = staticMessages.find(msg => msg.Message_ID === editingMessageId);
+    if (msg) {
+      msg.Message_Content = newContent;
+      saveMessages();
+      displayMessages(staticMessages);
+      showNotification('Message edited successfully!', 'success');
+    }
+  }
+  closeEditModal();
+};
+document.getElementById('cancelEditBtn').onclick = closeEditModal;
+document.getElementById('closeEditModal').onclick = closeEditModal;
+window.openEditModal = openEditModal;
+
 function deleteMessage(messageId) {
   if (confirm('Are you sure you want to delete this message?')) {
     staticMessages = staticMessages.filter(msg => msg.Message_ID !== messageId);
