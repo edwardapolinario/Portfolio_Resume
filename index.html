@@ -317,6 +317,19 @@
     <script src="script.js"></script>
     <!-- Scroll to Top Button -->
     <a href="#home" id="scrollToTop" style="position:fixed;right:2rem;bottom:2rem;z-index:999;background:var(--main-color);color:#fff;width:3.5rem;height:3.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(37,99,235,0.15);transition:opacity 0.3s;"><i class='bx bx-up-arrow-alt' style="font-size:2rem;"></i></a>
+
+    <!-- Edit Message Modal -->
+    <div id="editModal" class="edit-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(30,41,59,0.45);z-index:2000;align-items:center;justify-content:center;">
+      <div class="edit-modal-content" style="background:#fff;padding:2rem 2.5rem;border-radius:1.2rem;max-width:400px;width:90%;box-shadow:0 8px 32px rgba(30,41,59,0.18);position:relative;">
+        <h3 style="margin-bottom:1rem;">Edit Message</h3>
+        <textarea id="editMessageTextarea" rows="5" style="width:100%;padding:1rem;font-size:1.1rem;margin-bottom:1.2rem;"></textarea>
+        <div style="display:flex;justify-content:flex-end;gap:1rem;">
+          <button id="cancelEditBtn" style="padding:0.6rem 1.2rem;background:#eee;border:none;border-radius:0.5rem;cursor:pointer;">Cancel</button>
+          <button id="saveEditBtn" style="padding:0.6rem 1.2rem;background:var(--main-color);color:#fff;border:none;border-radius:0.5rem;cursor:pointer;">Save</button>
+        </div>
+        <button id="closeEditModal" style="position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#888;">&times;</button>
+      </div>
+    </div>
 </body>
 
 </html> 
